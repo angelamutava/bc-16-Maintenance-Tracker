@@ -11,6 +11,6 @@ class MaintananceForm(Form):
 	item_type = StringField('Item Type', validators=[Required()])
 	status = SelectField(
         'Status',
-        choices=[('good', 'Good'), ('needs repair', 'Needs Repair'), ('under repair', 'Under Repair')]
+        choices=[('good', 'Good'), ('needs repair', 'Needs Repair'), ('Under Repair', 'Under Repair')]
     )
 	submit = SubmitField('Raise')
