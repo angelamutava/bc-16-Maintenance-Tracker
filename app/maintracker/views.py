@@ -22,7 +22,8 @@ def home_page():
 @login_required
 def base():
 	maintanances = (Items.query.filter_by(raised_by=current_user.email))
-	return render_template('base.html', maintanances=maintanances)
+	approved = (Items.query.filter_by(status='Good').all())
+	return render_template('base.html', maintanances=maintanances, approved=approved)
 
 @main.route('/maintanance', methods=['GET', 'POST'])
 @login_required
@@ -30,7 +31,7 @@ def maintanance():
 	main_form = MaintananceForm()
 	if main_form.validate_on_submit():
 		main = Items(item_name=main_form.item_name.data,
-			item_issue=main_form.itsem_issue.data,
+			
 			item_type=main_form.item_type.data,
 			status=main_form.status.data,
 			raised_by=current_user.email)
@@ -40,3 +41,25 @@ def maintanance():
 		return redirect(url_for('main.base'))
 	return render_template('maintracker/maintanance.html', main_form=main_form)
 	
+
+@main.route('/admin_home', methods=['GET', 'POST'])
+@login_required
+def admin_home():
+	maintanances = (Items.query.filter_by(status='Needs Repair').all())
+	
+	return render_template('admin/admin_home.html', maintanances=maintanances)
+
+
+
+@main.route('/admin_mains', methods=['GET', 'POST'])
+@login_required
+def admin_mains():
+	maintanances = Items.query.all()
+	return render_template('admin/maintanance.html', maintanances=maintanances)
+
+
+@main.route('/admin_users', methods=['GET', 'POST'])
+@login_required
+def admin_users():
+	users = User.query.all()
+	return render_template('admin/users.html', users=users)
