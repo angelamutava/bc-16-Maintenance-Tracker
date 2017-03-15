@@ -15,7 +15,11 @@ def login():
         user = User.query.filter_by(email=user_form.email.data).first()
         if user is not None and user.verify_password(user_form.password.data):
             login_user(user, user_form.remember_me.data)
-            return redirect(url_for('main.base'))
+            if current_user.role == "user":
+                return redirect(request.args.get('next') or url_for('main.base'))
+            else:
+                return redirect(request.args.get('next') or url_for('main.admin_home'))
+            
         flash("Invalid username or password")
     return render_template('auth/login.html', user_form=user_form)
 
