@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(UserMixin, db.Model):
 	__tablename__ = 'users'
-	owner_id = db.Column(db.Integer, primary_key=True)
+	id = db.Column(db.Integer, primary_key=True)
 	first_name = db.Column(db.String(64))
 	last_name = db.Column(db.String(64))
 	email = db.Column(db.String(64), unique=True, index=True)
@@ -33,9 +33,10 @@ class User(UserMixin, db.Model):
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
 
-class Items():
+class Items(db.Model):
 	__tablename__ = "items"
 	item_id = db.Column(db.Integer, primary_key=True)
 	item_name = db.Column(db.String(64))
 	status = db.Column(db.String(64))
 	assigned_to = db.Column(db.String(64), default=False)
+	raised_by = db.Column(db.String(64))

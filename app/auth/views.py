@@ -8,10 +8,6 @@ from .. import db
 from ..model import User
 
 
-
-
-
-
 @auth.route('/sign_in', methods=['GET', 'POST'])
 def login():
     user_form = SignInForm()
@@ -19,9 +15,9 @@ def login():
         user = User.query.filter_by(email=user_form.email.data).first()
         if user is not None and user.verify_password(user_form.password.data):
             login_user(user, user_form.remember_me.data)
+            return redirect(url_for('main.base'))
         flash("Invalid username or password")
     return render_template('auth/login.html', user_form=user_form)
-
 
 @auth.route('/sign_up', methods=['GET', 'POST'])
 def signup():
@@ -32,8 +28,13 @@ def signup():
             email=user_form.email.data,
             phone_number=user_form.phone_number.data,
             password=user_form.password.data,
-            role_id=1)
+            role="user")
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html', user_form=user_form)
+
+@auth.route('/sign_out')
+def sign_out():
+    logout_user()
+    return redirect(url_for('auth.login'))    
