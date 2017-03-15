@@ -37,6 +37,8 @@ class Items(db.Model):
 	__tablename__ = "items"
 	item_id = db.Column(db.Integer, primary_key=True)
 	item_name = db.Column(db.String(64))
+	item_issue =db.Column(db.String(64))
+	item_type = db.Column(db.String(64))
 	status = db.Column(db.String(64))
 	assigned_to = db.Column(db.String(64), default=False)
 	raised_by = db.Column(db.String(64))
