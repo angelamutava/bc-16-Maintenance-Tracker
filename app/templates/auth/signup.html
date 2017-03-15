@@ -308,7 +308,9 @@ body {
 
       <p class="submit"> {{ wtf.form_field(user_form.submit) }}</p>
 
-
+       <div class="row">
+        <a href="{{ url_for('auth.login') }}" class="forgot">Already Signed up?Sign In</a>
+       </div>
     </form>
   </div> 
 </body>
