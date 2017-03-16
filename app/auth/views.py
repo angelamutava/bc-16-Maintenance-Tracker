@@ -1,7 +1,7 @@
 from . import auth
 from flask import render_template
 from .forms import SignInForm, SignUpForm
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.login import login_user, logout_user, current_user
 from flask import render_template, redirect, url_for, request, flash, session
 from . import auth
 from .. import db
