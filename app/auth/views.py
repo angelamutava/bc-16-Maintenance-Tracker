@@ -32,7 +32,7 @@ def signup():
             email=user_form.email.data,
             phone_number=user_form.phone_number.data,
             password=user_form.password.data,
-            role="user")
+            role="admin")
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
