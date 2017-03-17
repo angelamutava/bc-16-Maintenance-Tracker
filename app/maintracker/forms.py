@@ -13,9 +13,9 @@ class MaintananceForm(Form):
 	item_issue = StringField('Item Issue', validators=[Required()])
 	item_type = StringField('Item Type', validators=[Required()])
 	status = SelectField(
-        'Status',
-        choices=[('good', 'Good'), ('needs repair', 'Needs Repair'), ('Under Repair', 'Under Repair')]
-    )
+		'Status',
+		choices=[('needs repair', 'Needs Repair'), ('needs maintanance', 'Needs Maintanance')]
+	)
 	submit = SubmitField('Raise')
 
 class ApproveForm(Form):
@@ -24,6 +24,18 @@ class ApproveForm(Form):
 	item_type = StringField('Item Type', validators=[Required()])
 	comment = TextAreaField("Admin's Comment")
 	submit = SubmitField('Approve')
+	reject = SubmitField('Reject')
+
+class AssignForm(Form):
+	first_name = StringField('FirstName', validators=[Required(), Length(1, 20)])
+	last_name = StringField('LastName', validators=[Required(), Length(1, 20)])
+	phone_number = StringField('PhoneNumber', validators=[Required(), Length(1, 20)])
+	issue = StringField('Issue', validators=[Required(), Length(1, 20)])
+	department = SelectField(
+		'Department',
+		choices=[('Facilities', 'facilities')]
+	)
+	submit = SubmitField('Assign')
 
 
 class AddUserForm(Form):
@@ -40,4 +52,4 @@ class AddUserForm(Form):
 	def validate_email(self, field):
 		
 		if User.query.filter_by(email=field.data).first():
-			raise ValidationError('Email already registered.')	
+			raise ValidationError('Email already registered.')
