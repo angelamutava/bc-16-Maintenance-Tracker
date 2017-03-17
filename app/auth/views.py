@@ -41,4 +41,4 @@ def signup():
 @auth.route('/sign_out')
 def sign_out():
     logout_user()
-    return redirect(url_for('auth.login'))    
+    return redirect(url_for('auth.login'))

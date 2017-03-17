@@ -5,8 +5,8 @@
 <nav>
 <a href="{{ url_for('main.admin_mains') }}" class = "btn btn-info">View All Maintanance Requests</a>
 <a href="{{ url_for('main.admin_users') }}" class = "btn btn-info">View All Users</a>
-<a href="#" class = "btn btn-info">Assign Requests</a>
-<a href="#" class = "btn btn-info">Add Users</a>
+
+<a href="{{url_for('main.admin_add_user')}}" class = "btn btn-info">Add Users</a>
 </nav>
 {% endblock %}
 {% block page_content %}
@@ -28,8 +28,7 @@
          <th>LastName</th>
          <th>Email</th>
          <th>PhoneNumber</th>
-         
-         <th></th>
+         <th>Role</th>
          <th></th>
          
       </tr>
@@ -44,9 +43,9 @@
         
          <td>{{ users.email }}</td>
          <td>{{ users.phone_number }}</td>
+         <td>{{ users.role }}</td>
          
-         <td><a href="#" class = "btn btn-info"> Edit</a</td>
-         <td><a href="#" class = "btn btn-info"> Delete</a></td>
+        
          
          
       </tr>

@@ -5,6 +5,7 @@ from flask import current_app
 from . import login_manager
 from . import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import column_property
 
 
 class User(UserMixin, db.Model):
@@ -16,6 +17,7 @@ class User(UserMixin, db.Model):
 	phone_number = db.Column(db.String(64))
 	role = db.Column(db.String(64))
 	password_hash = db.Column(db.String(128))
+	full_name = column_property(first_name + " " + last_name)
 
 
 	@login_manager.user_loader
@@ -40,7 +42,7 @@ class Items(db.Model):
 	item_issue = db.Column(db.String(64))
 	item_type = db.Column(db.String(64))
 	status = db.Column(db.String(64))
-	assigned_to = db.Column(db.String(64), default=False)
+	assigned_to = db.Column(db.String(64))
 	raised_by = db.Column(db.String(64))
 	comment = db.Column(db.String(64))
 

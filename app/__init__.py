@@ -8,7 +8,7 @@ from flask_bootstrap import Bootstrap
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 login_manager = LoginManager()
 
 bootstrap = Bootstrap()
@@ -21,17 +21,16 @@ login_manager.session_protection = 'None'
 login_manager.login_view = 'auth.login'
 
 def create_app(config_name):
-	app = Flask(__name__)
-	app.config.from_object(config[config_name])
-	config[config_name].init_app(app)
-	app.config['SECRET_KEY'] = 'hard to guess string'
-	db.init_app(app)
-	login_manager.init_app(app)
-	bootstrap.init_app(app)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
+    app.config['SECRET_KEY'] = 'hard to guess string'
+    db = SQLAlchemy(app)
+    login_manager.init_app(app)
+    bootstrap.init_app(app)
 
-	from auth import auth as auth_blueprint
-	app.register_blueprint(auth_blueprint)
+    from auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
-	from maintracker import main as main_blueprint
-	app.register_blueprint(main_blueprint)
-	return app
+    from maintracker import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    return app

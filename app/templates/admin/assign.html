@@ -4,10 +4,10 @@
 
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block styles %}  
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="static/css/normalize.css">
-  <link rel="stylesheet" href="static/css/style.css">
-  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="static/css/normalize.css">
+	<link rel="stylesheet" href="static/css/style.css">
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">
 
 
 {% endblock %}
@@ -15,7 +15,6 @@
 <nav>
 <a href="{{ url_for('main.admin_mains') }}" class = "btn btn-info">View All Maintanance Requests</a>
 <a href="{{ url_for('main.admin_users') }}" class = "btn btn-info">View All Users</a>
-<a href="{{ url_for('main.assign')}}" class = "btn btn-info">Assign Requests</a>
 <a href="{{ url_for('main.admin_add_user')}}" class = "btn btn-info">Add Users</a>
 
 </nav>
@@ -23,54 +22,44 @@
 
 {% block page_content %}
 <div class="container">
-    <div class="row">
-         <div class="col-md-8">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Assign User </h3>
-          </div>
-          <div class="panel-body">
-        
-        <form role="form" method="POST" action="{{ url_for('main.assign') }} "class="form col-md-5">
-            {{ assign_form.hidden_tag() }}
-            <div class="row">
-                 <div class="column">
-                    {{ wtf.form_field(assign_form.first_name) }}
-                        
-                    </div>
-                </div>
-                 <div class="row">
-                 <div class="column">
-                        {{ wtf.form_field(assign_form.last_name) }}
-                        
-                    </div>
-                </div>
-                 <div class="row">
-                 <div class="column">
-                        {{ wtf.form_field(assign_form.phone_number) }}
-                        
-                    </div>
-                </div>
-                <div class="row">
-                 <div class="column">
-                        {{ wtf.form_field(assign_form.issue) }}
-                        
-                    </div>
-                </div>
+		<div class="row">
+				 <div class="col-md-8">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Assign User </h3>
+					</div>
+					<div class="panel-body">
+				
+				<form role="form" method="POST" action="{{url_for('main.assign', id=item.item_id)}}"class="form col-md-5">
+					  {{ assign_form.hidden_tag() }}
 
-                <div class="row">
-                 <div class="column">
-                        {{ wtf.form_field(assign_form.department) }}
-                        
-                    </div>
-                </div>
-                {{ wtf.form_field(assign_form.submit ) }}
-               
-            </div>
-        </form>
-    </div>
+					  <div class="row">
+								<div class="column">
+									
+											<p>Item Name : <label name="Item Name">{{ item.item_name}}</label>
+											<p>Item Issue :	<label name="Item Issue">{{ item.item_issue}}</label>
+											
+										</div>
+								</div>
+
+
+
+								<div class="row">
+								<div class="column">
+												{{ wtf.form_field(assign_form.assignees) }}
+												
+										</div>
+								</div>
+				<div class="row">
+								
+								</div>
+								{{ wtf.form_field(assign_form.submit ) }}
+							 
+						</div>
+				</form>
+		</div>
 </div>
 </div>
-   </div>
+	 </div>
 </div>
 {% endblock %}

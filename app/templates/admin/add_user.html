@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+
+{% block navbar %}
+<nav>
+<a href="{{ url_for('main.admin_mains') }}" class = "btn btn-info">View All Maintanance Requests</a>
+<a href="{{ url_for('main.admin_users') }}" class = "btn btn-info">View All Users</a>
+<a href="{{url_for('main.admin_add_user')}}" class = "btn btn-info">Add Users</a>
+
+</nav>
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+         <div class="col-md-8">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Add User </h3>
+          </div>
+          <div class="panel-body">
+        
+    <form class="form" method="post" action="#">
+       {{ user_form.hidden_tag() }}
+      <p class="field">
+         {{ wtf.form_field(user_form.first_name) }}
+        
+      </p>
+
+      <p class="field">
+         {{ wtf.form_field(user_form.last_name) }}
+        
+      </p>
+      <p class="field">
+        {{ wtf.form_field(user_form.email) }}
+       
+      </p>
+      <p class="field">
+         {{ wtf.form_field(user_form.phone_number) }}
+        
+      </p>
+      <p class="field">
+         {{ wtf.form_field(user_form.password) }}
+        
+      </p>
+       <p class="field">
+         {{ wtf.form_field(user_form.conf_password) }}
+        
+      </p>
+
+      <p class="submit"> {{ wtf.form_field(user_form.submit) }}</p
+    </form>
+    </div>
+</div>
+</div>
+   
+        
+    </div>
+</div>
+
+      
+
+
+{% endblock %}

@@ -3,10 +3,8 @@ from wtforms import StringField, SelectField, SubmitField, TextAreaField, Passwo
 from wtforms import ValidationError
 from wtforms.validators import Required, length
 from wtforms.validators import Required, Email, Length, EqualTo
-from ..model import User
-
-
-
+from app.model import User, Items
+from .. import db
 
 class MaintananceForm(Form):
 	item_name = StringField('Item Name', validators=[Required()])
@@ -27,14 +25,8 @@ class ApproveForm(Form):
 	reject = SubmitField('Reject')
 
 class AssignForm(Form):
-	first_name = StringField('FirstName', validators=[Required(), Length(1, 20)])
-	last_name = StringField('LastName', validators=[Required(), Length(1, 20)])
-	phone_number = StringField('PhoneNumber', validators=[Required(), Length(1, 20)])
-	issue = StringField('Issue', validators=[Required(), Length(1, 20)])
-	department = SelectField(
-		'Department',
-		choices=[('Facilities', 'facilities')]
-	)
+	
+	assignees = SelectField(id=User.id, choices=User.query.with_entities(User.id, User.full_name ).all(), coerce=int)
 	submit = SubmitField('Assign')
 
 

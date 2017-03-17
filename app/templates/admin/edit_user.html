@@ -6,15 +6,12 @@
   <link rel="stylesheet" href="static/css/normalize.css">
   <link rel="stylesheet" href="static/css/style.css">
   <link rel="stylesheet" href="static/css/bootstrap.min.css">
-
-
 {% endblock %}
 {% block navbar %}
 <nav>
 <a href="{{ url_for('main.admin_mains') }}" class = "btn btn-info">View All Maintanance Requests</a>
 <a href="{{ url_for('main.admin_users') }}" class = "btn btn-info">View All Users</a>
-<a href="#" class = "btn btn-info">Assign Requests</a>
-<a href="#" class = "btn btn-info">Add Uses</a>
+<a href="#" class = "btn btn-info">Add Users</a>
 
 </nav>
 {% endblock %}
@@ -66,8 +63,4 @@
 </div>
    </div>
 </div>
-
-      
-
-
 {% endblock %}

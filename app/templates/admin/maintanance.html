@@ -5,7 +5,6 @@
 <nav>
 <a href="{{ url_for('main.admin_mains') }}" class = "btn btn-info">View All Maintanance Requests</a>
 <a href="{{ url_for('main.admin_users') }}" class = "btn btn-info">View All Users</a>
-<a href="{{ url_for('main.assign')}}" class = "btn btn-info">Assign Requests</a>
 <a href="{{url_for('main.admin_add_user')}}" class = "btn btn-info">Add Users</a>
 </nav>
 {% endblock %}
@@ -28,6 +27,7 @@
          <th>Item Type</th>
          <th>Status</th>
          <th>Raised By</th>
+         <th>Assigned to</th>
          <th></th>
          
       </tr>
@@ -40,8 +40,9 @@
          <td>{{ maintanances.item_type }}</td>
          <td>{{ maintanances.status }}</td>
          <td>{{ maintanances.raised_by }}</td>
+         <td>{{ maintanances.assign_to }}</td>
          <td><a href="{{url_for('main.approve', id=maintanances.item_id)}}" class = "btn btn-info"> Approve/Reject</a></td>
-         
+         <td><a href="{{url_for('main.assign', id=maintanances.item_id)}}" class = "btn btn-info"> Assign</a></td>
       </tr>
     {% endfor %}
  </tbody>
