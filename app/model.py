@@ -43,3 +43,13 @@ class Items(db.Model):
 	assigned_to = db.Column(db.String(64), default=False)
 	raised_by = db.Column(db.String(64))
 	comment = db.Column(db.String(64))
+
+
+class Assigned(db.Model):
+	__tablename__ = 'assigns'
+	id = db.Column(db.Integer, primary_key=True)
+	first_name = db.Column(db.String(64))
+	last_name = db.Column(db.String(64))
+	phone_number = db.Column(db.String(64))
+	issue = db.Column(db.String(64))
+	department = db.Column(db.String(64))
