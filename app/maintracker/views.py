@@ -1,7 +1,7 @@
 from . import main
 from flask import render_template
-from .forms import AddUserForm, ApproveForm, MaintananceForm
-from ..model import User, Items
+from .forms import AddUserForm, ApproveForm, MaintananceForm, AssignForm
+from ..model import User, Items, Assigned
 from .. import db
 from flask import render_template, redirect, url_for, request, flash, session
 from flask.ext.login import logout_user, current_user, login_required
@@ -69,7 +69,7 @@ def approve(id):
 	approve_form = ApproveForm()
 	main_form = MaintananceForm()
 	if approve_form.validate_on_submit():
-		item.status = 'Good'
+		item.status = "Under Repair"
 		item.comment = approve_form.comment.data
 		db.session.add(item)
 		db.session.commit()
@@ -96,3 +96,19 @@ def admin_add_user():
 		db.session.commit()
 		return redirect(url_for('main.admin_mains'))
 	return render_template('admin/add_user.html', user_form=user_form)
+
+
+@main.route('/assign', methods=['GET', 'POST'])
+@login_required
+def assign():
+	assign_form = AssignForm()
+	if assign_form.validate_on_submit():
+		assigned = Assigned(first_name=assign_form.first_name.data,
+			last_name=assign_form.last_name.data,
+			phone_number=assign_form.phone_number.data,
+			issue=assign_form.issue.data,
+			department=assign_form.department.data)
+		db.session.add(assigned)
+		db.session.commit()
+		return redirect(url_for('main.admin_home'))
+	return render_template('admin/assign.html', assign_form=assign_form)
