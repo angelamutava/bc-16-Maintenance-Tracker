@@ -15,6 +15,13 @@
     <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
+<style>
+body {
+  font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
+  color: #000000;
+  background-image: url("static/bg.jpg")
+}
+</style>
 
 </head>
 
@@ -26,7 +33,7 @@
 
         <div class="header-limiter">
 
-            <h1><a href="#"><span>Maintanance Tracker</span></a></h1>
+            <h1 style="color:#000000;"><a href="#"><span>Maintanance Tracker</span></a></h1>
             {% if current_user.is_authenticated %}
              <a href="" class="logout-button">{{ current_user.email }}</a>
              {% endif %}

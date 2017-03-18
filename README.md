@@ -54,3 +54,7 @@ python manage.py db upgrade
 ###Run the server
 
 python manage.py runserver
+
+
+## Tasks not accomplished.
+
